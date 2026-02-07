@@ -2,121 +2,123 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
 body {
   height: 100vh;
-  background: radial-gradient(circle at top, #1a001f, #000);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
+  background: radial-gradient(circle at top, #2b0030, #050005);
   overflow: hidden;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.container {
+/* ---------- GIFT BOX ---------- */
+#giftBox {
   text-align: center;
+  cursor: pointer;
 }
 
-.rose {
+.gift {
   position: relative;
-  width: 120px;
-  height: 220px;
-  margin: 0 auto 30px;
-  animation: rise 2s ease-out forwards;
+  width: 180px;
+  height: 140px;
+  perspective: 800px;
+  animation: softShake 1.8s infinite;
 }
 
-@keyframes rise {
-  from { transform: translateY(150px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+@keyframes softShake {
+  0%,100% { transform: rotate(0deg); }
+  30% { transform: rotate(1.5deg); }
+  60% { transform: rotate(-1.5deg); }
 }
 
-/* petals */
-.petal {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  background: crimson;
-  border-radius: 50%;
-  opacity: 0;
-  animation: bloom 2s forwards;
-}
-
-.p1 { top: 20px; left: 20px; animation-delay: 0.5s; }
-.p2 { top: 0; left: 40px; animation-delay: 0.8s; }
-.p3 { top: 20px; left: 60px; animation-delay: 1.1s; }
-.p4 { top: 40px; left: 40px; animation-delay: 1.4s; }
-
-@keyframes bloom {
-  to {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-}
-
-.center {
-  position: absolute;
-  top: 45px;
-  left: 55px;
-  width: 30px;
-  height: 30px;
-  background: gold;
-  border-radius: 50%;
-  z-index: 2;
-}
-
-/* stem */
-.stem {
-  position: absolute;
-  top: 100px;
-  left: 60px;
-  width: 6px;
+.box {
+  width: 180px;
   height: 120px;
-  background: green;
+  background: linear-gradient(145deg,#b1123f,#ff4d6d);
+  border-radius: 14px;
+  box-shadow: inset 0 5px 10px rgba(255,255,255,0.2),
+              0 30px 60px rgba(0,0,0,0.6);
+  position: relative;
 }
 
-/* leaves */
-.leaf {
+.lid {
   position: absolute;
-  width: 40px;
-  height: 20px;
-  background: green;
-  border-radius: 20px;
+  top: -38px;
+  width: 180px;
+  height: 46px;
+  background: linear-gradient(145deg,#ff6f91,#c9184a);
+  border-radius: 14px;
+  transform-origin: bottom;
+  transition: transform 1s ease;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
-.leaf.left {
-  top: 150px;
-  left: 20px;
-  transform: rotate(-30deg);
+.ribbon-v {
+  position: absolute;
+  width: 18px;
+  height: 120px;
+  background: linear-gradient(#ffd166,#ffb703);
+  left: 81px;
 }
 
-.leaf.right {
-  top: 160px;
-  left: 70px;
-  transform: rotate(30deg);
+.ribbon-h {
+  position: absolute;
+  width: 180px;
+  height: 18px;
+  background: linear-gradient(#ffd166,#ffb703);
+  top: 52px;
 }
 
-/* text */
-.text h1,
-.text p,
-.text h2 {
+.open-text {
+  margin-top: 16px;
+  font-size: 22px;
+  animation: blink 1.4s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.6; }
+}
+
+/* ---------- ROSE SCENE ---------- */
+#sceneContainer {
+  width: 100%;
+  height: 58vh;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ---------- TEXT ---------- */
+.text {
+  text-align: center;
+  padding: 10px;
+}
+
+.text h1, .text p, .text h2 {
   opacity: 0;
   margin-top: 10px;
 }
 
-.text h1 {
-  font-size: 32px;
-  color: #ff4d6d;
+.text h1 { color: #ff4d6d; font-size: 28px; }
+.text p { font-size: 18px; }
+.text h2 { margin-top: 15px; color: #ffb703; }
+
+/* ---------- HEART ---------- */
+.heart {
+  position: absolute;
+  font-size: 22px;
+  animation: floatUp 2s forwards;
 }
 
-.text p {
-  font-size: 18px;
-  color: #f2f2f2;
-}
-
-.text h2 {
-  margin-top: 20px;
-  font-size: 24px;
-  color: #ffb703;
+@keyframes floatUp {
+  to {
+    transform: translateY(-80px);
+    opacity: 0;
+  }
 }
