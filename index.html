@@ -599,6 +599,90 @@
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
+        /* Final Celebration Overlay */
+        .final-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(255, 228, 233, 0.65);
+            backdrop-filter: blur(6px);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 5000;
+            transition: opacity 0.5s ease;
+        }
+
+        .final-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .final-overlay .final-card {
+            width: min(520px, 92vw);
+            border-radius: 22px;
+            padding: 36px 28px;
+            text-align: center;
+            background: linear-gradient(135deg, #FFF5F7, #FFE4E9, #FFF0F3);
+            border: 3px solid rgba(255, 182, 193, 0.9);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+            transform: scale(0.92);
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .final-overlay.show .final-card {
+            transform: scale(1);
+        }
+
+        .final-overlay h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5.5vw, 3rem);
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--red-rich), var(--pink-bright), var(--red-bright));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .final-overlay p {
+            font-size: clamp(1.05rem, 3vw, 1.25rem);
+            color: var(--chocolate-dark);
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        /* Chocolate Rain */
+        .chocolate-rain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 4500;
+        }
+
+        .choco-drop {
+            position: absolute;
+            top: -60px;
+            font-size: clamp(18px, 3vw, 34px);
+            opacity: 0.95;
+            filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+            animation-name: chocoFall;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+            will-change: transform;
+        }
+
+        @keyframes chocoFall {
+            0% {
+                transform: translateY(-80px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(calc(100vh + 120px)) rotate(540deg);
+            }
+        }
+
         @keyframes sparkleAnim {
             0%, 100% { 
                 opacity: 0; 
@@ -671,6 +755,15 @@
     </style>
 </head>
 <body>
+    <div class="chocolate-rain" id="chocolateRain" aria-hidden="true"></div>
+
+    <div class="final-overlay" id="finalOverlay" aria-hidden="true">
+        <div class="final-card">
+            <h2>Happy Chocolate Day! 💝</h2>
+            <p>For you, Priyanka — always.</p>
+        </div>
+    </div>
+
     <div class="container">
         <div class="header">
             <h1>Happy Chocolate Day! 💝</h1>
@@ -724,9 +817,12 @@
         const giftBox = document.getElementById('giftBox');
         const instruction = document.getElementById('instruction');
         const chocolates = document.querySelectorAll('.chocolate');
+        const finalOverlay = document.getElementById('finalOverlay');
+        const chocolateRain = document.getElementById('chocolateRain');
         let boxOpened = false;
         let currentChocolateIndex = 0;
         let isAnimating = false;
+        let celebrationStarted = false;
 
         // Open gift box
         giftBox.addEventListener('click', function(e) {
@@ -799,6 +895,8 @@
                         } else {
                             instruction.textContent = '💖 All chocolates delivered! Happy Chocolate Day! 💖';
                             instruction.style.animation = 'pulse 2s ease infinite';
+
+                            startFinalCelebration();
                         }
                     }, 550);
                     
@@ -809,6 +907,37 @@
                 }
             });
         });
+
+        function startFinalCelebration() {
+            if (celebrationStarted) return;
+            celebrationStarted = true;
+
+            finalOverlay.classList.add('show');
+            finalOverlay.setAttribute('aria-hidden', 'false');
+
+            createChocolateRain(110);
+        }
+
+        function createChocolateRain(count) {
+            for (let i = 0; i < count; i++) {
+                const drop = document.createElement('span');
+                drop.className = 'choco-drop';
+                drop.textContent = '🍫';
+
+                const left = Math.random() * 100;
+                const duration = 4 + Math.random() * 5; // 4s - 9s
+                const delay = Math.random() * 4.5; // spread start times
+                const drift = (Math.random() - 0.5) * 80;
+
+                drop.style.left = left + 'vw';
+                drop.style.animationDuration = duration + 's';
+                drop.style.animationDelay = delay + 's';
+                drop.style.transform = `translateX(${drift}px)`;
+
+                drop.addEventListener('animationend', () => drop.remove());
+                chocolateRain.appendChild(drop);
+            }
+        }
 
         // Create sparkle animation
         function createSparkles() {
