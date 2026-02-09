@@ -1,38 +1,840 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>A Rose for You, Priyanka 🌹</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Chocolate Day Priyanka 💝</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --chocolate-dark: #3E2723;
+            --chocolate-medium: #6D4C41;
+            --chocolate-light: #A1887F;
+            --pink-soft: #FFE4E9;
+            --pink-medium: #FFB3C1;
+            --pink-bright: #FF6B9D;
+            --gold: #D4AF37;
+            --cream: #FFF8E7;
+            --red-rich: #C41E3A;
+            --red-bright: #E94B3C;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: radial-gradient(circle at 20% 50%, #FFE5EC 0%, #FFC9D9 50%, #FFB3C6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated hearts background */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle, rgba(255, 107, 157, 0.15) 2px, transparent 2px),
+                radial-gradient(circle, rgba(255, 192, 203, 0.1) 1px, transparent 1px);
+            background-size: 60px 60px, 90px 90px;
+            background-position: 0 0, 45px 45px;
+            animation: floatBg 25s linear infinite;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '💕';
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.1;
+            animation: floatingHearts 15s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatBg {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(60px); }
+        }
+
+        @keyframes floatingHearts {
+            0%, 100% { 
+                transform: translate(-50%, -50%) rotate(0deg);
+                top: 20%;
+                left: 10%;
+            }
+            25% { 
+                top: 80%;
+                left: 90%;
+                transform: translate(-50%, -50%) rotate(90deg);
+            }
+            50% { 
+                top: 30%;
+                left: 80%;
+                transform: translate(-50%, -50%) rotate(180deg);
+            }
+            75% { 
+                top: 70%;
+                left: 20%;
+                transform: translate(-50%, -50%) rotate(270deg);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1.2s ease;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            background: linear-gradient(135deg, var(--red-rich), var(--pink-bright), var(--red-bright));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 107, 157, 0.3);
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header .subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: var(--chocolate-dark);
+            font-weight: 400;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .gift-box-wrapper {
+            perspective: 1500px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .gift-box {
+            position: relative;
+            width: 100%;
+            overflow: visible;
+            aspect-ratio: 0.95;
+            max-width: 450px;
+            margin: 0 auto;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.4s ease;
+        }
+
+        .gift-box:hover:not(.opened) {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        /* Luxury Gift Box Base */
+        .box-base {
+            width: 100%;
+            height: 65%;
+            background: linear-gradient(135deg, #5D4037 0%, #3E2723 50%, #4E342E 100%);
+            border-radius: 20px;
+            position: absolute;
+            bottom: 0;
+            z-index: 1;
+            box-shadow: 
+                0 30px 80px rgba(62, 39, 35, 0.5),
+                inset 0 -5px 20px rgba(0, 0, 0, 0.3),
+                inset 0 5px 20px rgba(255, 255, 255, 0.1);
+            border: 4px solid var(--gold);
+            overflow: hidden;
+        }
+
+        /* Chocolate texture pattern */
+        .box-base::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 15px,
+                    rgba(0, 0, 0, 0.1) 15px,
+                    rgba(0, 0, 0, 0.1) 16px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 15px,
+                    rgba(0, 0, 0, 0.1) 15px,
+                    rgba(0, 0, 0, 0.1) 16px
+                );
+            opacity: 0.3;
+        }
+
+        /* Shine effect on box */
+        .box-base::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.15) 50%,
+                transparent 70%
+            );
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Premium Lid */
+        .box-lid {
+            width: 105%;
+            height: 32%;
+            background: linear-gradient(145deg, #FF1744 0%, #C41E3A 50%, #E91E63 100%);
+            border-radius: 25px 25px 8px 8px;
+            position: absolute;
+            top: 0;
+            left: -2.5%;
+            z-index: 2;
+            transform-origin: bottom;
+            transition: transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 
+                0 15px 40px rgba(196, 30, 58, 0.6),
+                inset 0 -3px 15px rgba(0, 0, 0, 0.3),
+                inset 0 3px 15px rgba(255, 255, 255, 0.3);
+            border: 4px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
+            overflow: hidden;
+        }
+
+        /* Lid texture */
+        .box-lid::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(255, 255, 255, 0.05) 20px,
+                    rgba(255, 255, 255, 0.05) 22px
+                );
+        }
+
+        /* Beautiful 3D Bow */
+        .bow {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 80px;
+            z-index: 10;
+        }
+
+        .bow-center {
+            position: absolute;
+            width: 35px;
+            height: 40px;
+            background: linear-gradient(135deg, #FFD700, var(--gold));
+            border-radius: 8px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
+            z-index: 3;
+        }
+
+        .bow-center::after {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            background: linear-gradient(135deg, #FFF59D, #FFD700);
+            border-radius: 6px;
+        }
+
+        .bow-left, .bow-right {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #FFD700, var(--gold));
+            border-radius: 50% 50% 0 50%;
+            top: 50%;
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .bow-left {
+            left: 0;
+            transform: translateY(-50%) rotate(-45deg);
+        }
+
+        .bow-right {
+            right: 0;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .bow-left::after, .bow-right::after {
+            content: '';
+            position: absolute;
+            inset: 5px;
+            background: linear-gradient(135deg, #FFF59D, #FFD700);
+            border-radius: 50% 50% 0 50%;
+        }
+
+        /* Ribbon strands */
+        .bow-tail-left, .bow-tail-right {
+            position: absolute;
+            width: 20px;
+            height: 70px;
+            background: linear-gradient(90deg, #FFD700, var(--gold));
+            top: 70%;
+            clip-path: polygon(30% 0%, 70% 0%, 50% 100%, 0% 100%);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .bow-tail-left {
+            left: 15%;
+            transform: rotate(-20deg);
+        }
+
+        .bow-tail-right {
+            right: 15%;
+            transform: rotate(20deg);
+        }
+
+        /* Premium Ribbons */
+        .ribbon-vertical {
+            width: 40px;
+            height: 100%;
+            background: linear-gradient(90deg, #C9A961, var(--gold), #FFD700, var(--gold), #C9A961);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 
+                0 0 20px rgba(212, 175, 55, 0.6),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+            z-index: 1;
+        }
+
+        .ribbon-horizontal {
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(180deg, #C9A961, var(--gold), #FFD700, var(--gold), #C9A961);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 
+                0 0 20px rgba(212, 175, 55, 0.6),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .ribbon-vertical::before, .ribbon-horizontal::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 5px,
+                rgba(255, 255, 255, 0.1) 5px,
+                rgba(255, 255, 255, 0.1) 6px
+            );
+        }
+
+        /* Opening animation */
+        .gift-box.opened .box-lid {
+            transform: rotateX(-130deg) translateY(-25px);
+        }
+
+        .gift-box.opened .bow {
+            animation: bowFly 0.8s ease forwards;
+        }
+
+        .gift-box.opened .ribbon-vertical,
+        .gift-box.opened .ribbon-horizontal {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        @keyframes bowFly {
+            0% {
+                transform: translateX(-50%) translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) translateY(-200px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Chocolates Container */
+        .chocolates-container {
+            position: absolute;
+            left: 50%;
+            bottom: 70%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 0;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .gift-box.opened .chocolates-container {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Premium Chocolate Design */
+        .chocolate {
+            background: 
+                linear-gradient(145deg, #8B4513 0%, #5D3A1A 50%, #3D2817 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.4),
+                inset 0 -3px 8px rgba(0, 0, 0, 0.3),
+                inset 0 2px 8px rgba(255, 255, 255, 0.2);
+            position: absolute;
+            left: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(212, 175, 55, 0.4);
+            width: 220px;
+    height: 220px;
+            opacity: 0;
+            transform: translateX(-50%) translateY(120px) scale(0.5);
+            pointer-events: none;
+            z-index: 101;
+        }
+
+        /* Chocolate popup animation */
+        .chocolate.active {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-180px) scale(1);
+            pointer-events: all;
+        }
+
+        .chocolate.opened {
+            transform: translateX(-50%) translateY(-180px) scale(1.15);
+        }
+
+        /* Chocolate disappearing animation */
+        .chocolate.disappear {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-260px) scale(0);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        /* Chocolate wrapper effect */
+        .chocolate::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 8px,
+                    rgba(139, 69, 19, 0.3) 8px,
+                    rgba(139, 69, 19, 0.3) 10px
+                );
+            pointer-events: none;
+        }
+
+        .chocolate::before {
+            content: '🍫';
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+            z-index: 1;
+            position: relative;
+        }
+
+        .chocolate:hover:not(.opened):not(.disappear) {
+            transform: translateX(-50%) translateY(-185px) scale(1.08) rotate(2deg);
+            box-shadow: 
+                0 15px 35px rgba(255, 107, 157, 0.5),
+                0 0 30px rgba(255, 215, 0, 0.3),
+                inset 0 -3px 8px rgba(0, 0, 0, 0.3),
+                inset 0 2px 8px rgba(255, 255, 255, 0.2);
+            border-color: var(--gold);
+        }
+
+        .chocolate:active:not(.opened):not(.disappear) {
+            transform: translateX(-50%) translateY(-175px) scale(1.04);
+        }
+
+        .chocolate.opened::before {
+            transform: scale(0) rotate(180deg);
+            opacity: 0;
+        }
+
+        .chocolate.opened::after {
+            opacity: 0;
+        }
+
+        /* Message Card */
+        .message {
+            position: absolute;
+            inset: 0;
+            transform: scale(0);
+            background: linear-gradient(135deg, #FFF5F7, #FFE4E9, #FFF0F3);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            color: var(--chocolate-dark);
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.5s ease;
+            line-height: 1.6;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 0 30px rgba(255, 192, 203, 0.3);
+            border: 3px solid rgba(255, 182, 193, 0.8);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .chocolate.opened .message {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: all;
+        }
+
+        /* Instructions */
+        .tap-instruction {
+            text-align: center;
+            margin-top: 30px;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: var(--chocolate-dark);
+            opacity: 0;
+            animation: fadeIn 1.2s ease 0.8s forwards;
+            font-weight: 500;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .gift-box.opened ~ .tap-instruction {
+            animation: pulse 2.5s ease infinite;
+        }
+
+        .from {
+            text-align: center;
+            margin-top: 35px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+            color: var(--chocolate-dark);
+            opacity: 0;
+            animation: fadeIn 1.2s ease 2s forwards;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1.08);
+                opacity: 0.8;
+            }
+        }
+
+        /* Sparkle Effects */
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, white, transparent);
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkleAnim 2s ease infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes sparkleAnim {
+            0%, 100% { 
+                opacity: 0; 
+                transform: scale(0) rotate(0deg);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.5) rotate(180deg);
+            }
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .chocolate {
+                width: 160px;
+                height: 160px;
+            }
+
+            .chocolate::before {
+                font-size: 2.5rem;
+            }
+
+            .message {
+                font-size: 1.1rem;
+                padding: 22px;
+            }
+
+            .bow {
+                width: 100px;
+                height: 70px;
+                top: -30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chocolate {
+                width: 200px;
+        height: 200px;
+            }
+
+            .chocolate::before {
+                font-size: 2rem;
+            }
+
+            .message {
+                font-size: 1rem;
+                padding: 18px;
+            }
+
+            .bow {
+                width: 80px;
+                height: 60px;
+                top: -25px;
+            }
+
+            .bow-center {
+                width: 28px;
+                height: 32px;
+            }
+
+            .bow-left, .bow-right {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <h1>Happy Chocolate Day! 💝</h1>
+            <p class="subtitle">For the sweetest person in my life</p>
+        </div>
 
-<!-- GIFT BOX -->
-<div id="giftBox">
-  <div class="gift">
-    <div class="lid"></div>
-    <div class="box">
-      <div class="ribbon-v"></div>
-      <div class="ribbon-h"></div>
+        <div class="gift-box-wrapper">
+            <div class="gift-box" id="giftBox">
+                <div class="box-lid">
+                    <div class="bow">
+                        <div class="bow-left"></div>
+                        <div class="bow-right"></div>
+                        <div class="bow-center"></div>
+                        <div class="bow-tail-left"></div>
+                        <div class="bow-tail-right"></div>
+                    </div>
+                </div>
+                <div class="box-base">
+                    <div class="ribbon-vertical"></div>
+                    <div class="ribbon-horizontal"></div>
+                </div>
+                
+                <div class="chocolates-container">
+                    <div class="chocolate" data-message="You're the sweetest chocolate in my life 🍫">
+                        <div class="message">You're the sweetest chocolate in my life 🍫</div>
+                    </div>
+                    <div class="chocolate" data-message="Everything feels incomplete without you ❤️">
+                        <div class="message">Everything feels incomplete without you ❤️</div>
+                    </div>
+                    <div class="chocolate" data-message="Miles apart, but close in heart 💕">
+                        <div class="message">Miles apart, but close in heart 💕</div>
+                    </div>
+                    <div class="chocolate" data-message="Every day with you is special 🌟">
+                        <div class="message">Every day with you is special 🌟</div>
+                    </div>
+                    <div class="chocolate" data-message="I love you Priyanka, today and always 💖">
+                        <div class="message">I love you Priyanka, today and always 💖</div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="tap-instruction" id="instruction">✨ Click the box to open your gift ✨</p>
+        </div>
+
+        <div class="from">
+            <p>With love,<br><strong>Dhanu</strong> 💕</p>
+        </div>
     </div>
-  </div>
-  <p class="open-text">Open me please 😉</p>
-</div>
 
-<!-- ROSE -->
-<div id="sceneContainer" class="hidden"></div>
+    <script>
+        const giftBox = document.getElementById('giftBox');
+        const instruction = document.getElementById('instruction');
+        const chocolates = document.querySelectorAll('.chocolate');
+        let boxOpened = false;
+        let currentChocolateIndex = 0;
+        let isAnimating = false;
 
-<!-- TEXT -->
-<div class="text hidden" id="textBlock">
-  <h1 id="line1"></h1>
-  <p id="line2"></p>
-  <p id="line3"></p>
-  <p id="line4"></p>
-  <h2 id="line5"></h2>
-</div>
+        // Open gift box
+        giftBox.addEventListener('click', function(e) {
+            if (!boxOpened && !e.target.closest('.chocolate') && !e.target.closest('.message')) {
+                boxOpened = true;
+                giftBox.classList.add('opened');
+                instruction.textContent = '💝 Tap the chocolate to read your message 💝';
+                
+                // Add sparkle effect
+                createSparkles();
+                
+                // Show first chocolate after box opens
+                setTimeout(() => {
+                    showNextChocolate();
+                }, 800);
+            }
+        });
 
-<script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
-<script src="script.js"></script>
+        // Function to show next chocolate
+        function showNextChocolate() {
+            if (currentChocolateIndex < chocolates.length && !isAnimating) {
+                const chocolate = chocolates[currentChocolateIndex];
+                chocolate.classList.add('active');
+                
+                // Haptic feedback for mobile
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(50);
+                }
+            }
+        }
+
+        // Handle chocolate and message clicks
+        chocolates.forEach((chocolate, index) => {
+            const message = chocolate.querySelector('.message');
+            
+            // Click on chocolate to show message
+            chocolate.addEventListener('click', function(e) {
+                if (this.classList.contains('active') && !this.classList.contains('opened') && !isAnimating) {
+                    e.stopPropagation();
+                    this.classList.add('opened');
+                    
+                    // Update instruction
+                    instruction.textContent = '✨ Tap the message to continue ✨';
+                    
+                    // Haptic feedback
+                    if (window.navigator.vibrate) {
+                        window.navigator.vibrate(50);
+                    }
+                }
+            });
+            
+            // Click on message to expand and move to next
+            message.addEventListener('click', function(e) {
+                if (chocolate.classList.contains('opened') && !isAnimating) {
+                    e.stopPropagation();
+                    isAnimating = true;
+
+                    // Disappear chocolate (message is inside card now)
+                    chocolate.classList.add('disappear');
+
+                    // After chocolate disappears
+                    setTimeout(() => {
+                        isAnimating = false;
+                        currentChocolateIndex++;
+
+                        // Show next chocolate or finish
+                        if (currentChocolateIndex < chocolates.length) {
+                            instruction.textContent = '💝 Tap the chocolate to read your message 💝';
+                            showNextChocolate();
+                        } else {
+                            instruction.textContent = '💖 All chocolates delivered! Happy Chocolate Day! 💖';
+                            instruction.style.animation = 'pulse 2s ease infinite';
+                        }
+                    }, 550);
+                    
+                    // Haptic feedback
+                    if (window.navigator.vibrate) {
+                        window.navigator.vibrate(100);
+                    }
+                }
+            });
+        });
+
+        // Create sparkle animation
+        function createSparkles() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * 100 + '%';
+                    sparkle.style.top = Math.random() * 100 + '%';
+                    sparkle.style.animationDelay = Math.random() * 1 + 's';
+                    giftBox.appendChild(sparkle);
+                    
+                    setTimeout(() => sparkle.remove(), 2000);
+                }, i * 100);
+            }
+        }
+
+        // Prevent double-tap zoom on mobile
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(e) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
 </body>
 </html>
